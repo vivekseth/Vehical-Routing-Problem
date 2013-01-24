@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Route {
 	
-	public int allowed;
-	public int actual;
-	public int totalCost;
+	public double weightLimit;
+	public double weightActual;
+	public double totalCost;
 	
 	
 	public int[] nodes;
@@ -84,7 +84,7 @@ public class Route {
 			for(Edge e:r2.edges){
 				this.add(e);
 			}
-			this.actual+= r2.actual;
+			this.weightActual+= r2.weightActual;
 			this.add(mergingEdge);
 			return true;
 		// moznost dva
@@ -98,7 +98,7 @@ public class Route {
 			for(Edge e:r2.edges){
 				this.add(e);
 			}
-			this.actual+= r2.actual;
+			this.weightActual+= r2.weightActual;
 			this.add(mergingEdge);
 			return true;
 		}

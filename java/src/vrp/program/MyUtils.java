@@ -42,8 +42,8 @@ public class MyUtils {
 		}
 	}
 	
-	public static void printAdds(ArrayList<Route> routes,String[] adds,StringBuilder sb){
-		int totalCost = 0;
+	public static void printAdds(ArrayList<Route> routes,Node[] adds,StringBuilder sb){
+		double totalCost = 0;
 		for(Route r:routes){
 			printAdds(r,adds,sb);
 			sb.append("\r\n");
@@ -64,7 +64,7 @@ public class MyUtils {
 		}while(edge.n2.index!=0);
 		
 		
-		System.out.print(" Amount: " + r.actual + " Cost: " + r.totalCost);
+		System.out.print(" Amount: " + r.weightActual + " Cost: " + r.totalCost);
 		
 		System.out.println("");
 	}
@@ -88,13 +88,13 @@ public class MyUtils {
 	 * @param r
 	 * @param adds
 	 */
-	public static void printAdds(Route r,String[] adds,StringBuilder sb){
-		sb.append(adds[0]);
+	public static void printAdds(Route r,Node[] adds,StringBuilder sb){
+		sb.append(adds[0].name);
 		Edge edge = r.outEdges[0];
-		sb.append(" -> " + adds[edge.n2.index]);
+		sb.append(" -> " + adds[edge.n2.index].name);
 		do{
 			edge = r.outEdges[edge.n2.index];
-			sb.append(" -> " + adds[edge.n2.index]);
+			sb.append(" -> " + adds[edge.n2.index].name);
 		}while(edge.n2.index!=0);
 	}
 	
@@ -112,7 +112,7 @@ public class MyUtils {
 		System.out.println("Total cost of the routes: " + totalCost);
 	}
 	
-	public static int compClusterCost(Cluster cl,int distances[][]){
+	public static int compClusterCost(Cluster cl,double[][] distances){
 		int cost = 0;
 		for(int i=0;i<cl.tsp.size()-1;i++){
 			Node n=cl.tsp.get(i);
@@ -121,7 +121,7 @@ public class MyUtils {
 			cost+=distances[n.index][n1.index];
 		}
 		return cost;
-	}
+	} 
 	
 	public static String generateRandomNodes(int count,int distanceMultConst,int amountConst){
 		
@@ -133,15 +133,15 @@ public class MyUtils {
 			int y = (int)(Math.random() * distanceMultConst);
 			for(int j=0;j<i;j++){
 				Node n = nodes[j];
-				int dist = (int)Math.sqrt((x-n.x)*(x-n.x) + (y-n.y)*(y-n.y));
+				int dist = (int)Math.sqrt((x-n.lat)*(x-n.lat) + (y-n.lng)*(y-n.lng));
 				distances[i][n.index] = dist;
 				distances[n.index][i] = dist;			
 			}
-			Node newNode = new Node(i);
-	        newNode.x = x;
-	        newNode.y = y;
-	        newNode.add = "N" + i;
-	        newNode.amount = (int) (Math.random() * amountConst);
+			Node newNode = new Node(i, "N" + i, x, y, (int) (Math.random() * amountConst));
+	        //newNode.x = x;
+	        //newNode.y = y;
+	        //newNode.name = "N" + i;
+	        //newNode.weight = (int) (Math.random() * amountConst);
 			nodes[i] = newNode;
 		}
 		//vypisu
@@ -168,7 +168,7 @@ public class MyUtils {
 		sb.append("\r\n");
 		
 		for(int i=0;i<nodes.length;i++){
-			sb.append(nodes[i].amount + ";" + nodes[i].add + ";" + nodes[i].x + ";" + nodes[i].y);
+			sb.append(nodes[i].weight + ";" + nodes[i].name + ";" + nodes[i].lat + ";" + nodes[i].lng);
 			sb.append("\r\n");
 		}
 		

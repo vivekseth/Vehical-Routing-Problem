@@ -20,7 +20,7 @@ public class Cluster {
 	
 	public void add(Node n){
 		nodes.add(n);
-		amount+= n.amount;
+		amount+= n.weight;
 	}
 	
 	public Cluster copy(){
@@ -97,7 +97,7 @@ public class Cluster {
 		int nodeCount  = tsp.size();
 		for(int i=0;i<nodeCount;i++){
 			Node n = tsp.get(i);
-			sb.append(n.add);
+			sb.append(n.name);
 			if(i<nodeCount-1){
 				sb.append("->");
 			}

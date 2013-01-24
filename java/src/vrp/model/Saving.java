@@ -1,12 +1,12 @@
 package vrp.model;
 
 public class Saving implements Comparable<Saving>{
-	public int val;
+	public double val;
 	public Node from;
 	public Node to;
 	
-	public Saving(int v,Node f,Node t){
-		val = v;
+	public Saving(double sav,Node f,Node t){
+		val = sav;
 		from = f;
 		to = t;
 	}

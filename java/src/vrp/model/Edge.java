@@ -4,14 +4,14 @@ public class Edge implements Comparable<Edge>{
 	public Node n1;
 	public Node n2;
 	
-	public int val;
+	public double val;
 	
 	public Edge next;
 	
-	public Edge(Node ln1,Node ln2,int dist){
+	public Edge(Node ln1,Node ln2,double distances){
 		this.n1 = ln1;
 		this.n2 = ln2;
-		this.val = dist;
+		this.val = distances;
 	}
 	
 	public void connect(Edge e1){

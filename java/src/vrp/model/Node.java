@@ -8,8 +8,8 @@ public class Node implements Comparable<Node>{
 	
 	
 	public int cluster;
-	public double x;
-	public double y;
+	public double lat;
+	public double lng;
 	public double angle;
 
 	public int state;
@@ -17,13 +17,17 @@ public class Node implements Comparable<Node>{
 	
 	public ArrayList<Edge> mstEdges;
 	
-	public String add;
+	public String name;
 	
-	public int amount;
+	public int weight;
 	
 	
-	public Node(int i){
+	public Node(int i, String name, double x, double y, int weight){
 		index = i;
+		this.name = name;
+		this.lat = x;
+		this.lng = y;
+		this.weight = weight;
 	}
 
 
@@ -36,5 +40,10 @@ public class Node implements Comparable<Node>{
 		}else{
 			return 1;
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return index+"";
 	}
 }
